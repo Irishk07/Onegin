@@ -26,7 +26,7 @@ void s_strswap(const char *s_onegin[], size_t strok1, size_t strok2) {
 
 void s_buble_sort(const char *s_onegin[]) {
 
-    //как посчитать рамзер массива с указателями //TODO
+    //как посчитать размер массива с указателями //TODO
 
     for (size_t i = 0; i < LEN_OF_FILE; ++i) {
         for (size_t j = 0; j < LEN_OF_FILE - i - 1; ++j) {
@@ -56,6 +56,6 @@ void s_puts_onegin(const char *s_onegin[]) {
 
 void s_onegin_dtor(const char *s_onegin[]) {
     for (int i = 0; i < LEN_OF_FILE; ++i) {
-        free((char *)s_onegin[i]); //FIXME
+        free((void *)s_onegin[i]); //FIXME
     }
 }
