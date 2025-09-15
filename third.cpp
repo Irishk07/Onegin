@@ -3,11 +3,15 @@
 #include "main.h"
 #include "string_functions.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 
 char *t_read_onegin(int *cnt_strok, int *text_size) {
+    assert(cnt_strok != NULL);
+    assert(text_size != NULL);
+
     FILE *text = fopen("Onegin.txt", "r");
     const char *text_name = "Onegin.txt";
 
@@ -34,6 +38,9 @@ char *t_read_onegin(int *cnt_strok, int *text_size) {
 }
 
 void t_fill_array_onegin(const char **t_points_onegin, char *t_text_onegin, int text_size) {
+    assert(t_points_onegin != NULL);
+    assert(t_text_onegin != NULL);
+
     *t_points_onegin++ = t_text_onegin;
 
     for (int i = 0; i < text_size; ++i) {
@@ -44,12 +51,16 @@ void t_fill_array_onegin(const char **t_points_onegin, char *t_text_onegin, int 
 }
 
 void t_strswap(const char **t_points_onegin, int strok1, int strok2) {
+    assert(t_points_onegin != NULL);
+
     const char *temp = t_points_onegin[strok1];
     t_points_onegin[strok1] = t_points_onegin[strok2];
     t_points_onegin[strok2] = temp;
 }
 
 void t_buble_sort(const char **t_points_onegin, int cnt_strok) {
+    assert(t_points_onegin != NULL);
+
     for (int i = 0; i < cnt_strok; ++i) {
         for (int j = 0; j < cnt_strok - i - 1; ++j) {
             if (t_points_onegin[j] == NULL || t_points_onegin[j + 1] == NULL) { //FIXME
@@ -64,6 +75,8 @@ void t_buble_sort(const char **t_points_onegin, int cnt_strok) {
 }
 
 void t_puts_onegin(const char **t_points_onegin, int cnt_strok) {
+    assert(t_points_onegin != NULL);
+
     FILE *text_sort = fopen("Onegin_sort.txt", "w");
 
     for (int i = 0; i < cnt_strok; ++i) {
@@ -79,6 +92,9 @@ void t_puts_onegin(const char **t_points_onegin, int cnt_strok) {
 }
 
 void t_onegin_dtor(char *t_text_onegin, const char **t_points_onegin) {
+    assert(t_points_onegin != NULL);
+    assert(t_text_onegin != NULL);
+    
     free((void *)t_text_onegin);
     free((void *)t_points_onegin);
 }
