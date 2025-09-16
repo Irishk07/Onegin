@@ -1,54 +1,36 @@
 #include "main.h"
 
-#include "first.h"
-#include "second.h"
-#include "third.h"
+#include "input.h"
+#include "sort_swap.h"
+#include "put_dtor.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main() {
-
-    //frist
-
-    // char f_onegin[LEN_OF_FILE][LEN_OF_LINE] = {{}};
-
-    // f_read_onegin(f_onegin);
-
-    // f_buble_sort(LEN_OF_FILE, f_onegin);
-
-    // f_puts_onegin(LEN_OF_FILE, f_onegin);
-
-
-    //second
-
-    // const char * s_onegin[LEN_OF_FILE] = {};
-
-    // s_read_onegin(s_onegin);
-
-    // s_buble_sort(s_onegin);
-
-    // s_puts_onegin(s_onegin);
-
-    // s_onegin_dtor(s_onegin);
-
-
-    //third
-
     int cnt_strok = 0;
     int text_size = 0;
 
-    char *t_text_onegin = t_read_onegin(&cnt_strok, &text_size);
+    char * text_onegin = read_onegin(&cnt_strok, &text_size);
 
-    const char **t_points_onegin = (const char**)calloc((size_t)(cnt_strok + 1), sizeof(char *));
+    info_about_strings *onegin_strings = (info_about_strings*)calloc((size_t)(cnt_strok + 1), sizeof(info_about_strings));
 
-    t_fill_array_onegin(t_points_onegin, t_text_onegin, text_size);
+    fill_array_onegin(onegin_strings, text_onegin, text_size);
 
-    t_buble_sort(t_points_onegin, cnt_strok);
+    FILE *text_sort = fopen("Onegin_sort.txt", "w");
+    buble_sort_begin(onegin_strings, cnt_strok);
 
-    t_puts_onegin(t_points_onegin, cnt_strok);
+    puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    t_onegin_dtor(t_text_onegin, t_points_onegin);
+    qsort(onegin_strings, cnt_strok + 1, sizeof(info_about_strings), &end_comparator);
+    puts_onegin(onegin_strings, cnt_strok, text_sort);
+
+    qsort(onegin_strings, cnt_strok + 1, sizeof(info_about_strings), &point_comparator);
+    puts_onegin(onegin_strings, cnt_strok, text_sort);
+
+    fclose(text_sort);
+
+    onegin_dtor(text_onegin, onegin_strings);
 
     return 0;
 }
