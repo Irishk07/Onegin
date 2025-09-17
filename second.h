@@ -11,6 +11,6 @@ void s_buble_sort(const char *s_onegin[]);
 
 void s_puts_onegin(const char *s_onegin[]);
 
-void s_onegin_dtor(const char *s_onegin[]);
+void s_onegin_dtor(char *s_onegin[]);
 
 #endif //SECOND_H_

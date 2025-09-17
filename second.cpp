@@ -13,6 +13,7 @@ void s_read_onegin(const char *s_onegin[]) {
     char temp[LEN_OF_LINE] = {};
     for (int i = 0; my_fgets(temp, LEN_OF_LINE, text); ++i) {
         s_onegin[i] = my_strdup(temp);
+        // FIXME check errors
     }
 
     fclose(text);
@@ -54,8 +55,8 @@ void s_puts_onegin(const char *s_onegin[]) {
     fclose(text_sort);
 }
 
-void s_onegin_dtor(const char *s_onegin[]) {
+void s_onegin_dtor(char *s_onegin[]) {
     for (int i = 0; i < LEN_OF_FILE; ++i) {
-        free((void *)s_onegin[i]); //FIXME
+        free(s_onegin[i]);
     }
 }
