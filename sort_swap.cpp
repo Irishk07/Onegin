@@ -27,7 +27,7 @@ int begin_comparator(const void * param1, const void * param2) {
     begin_skip_no_alpha(&v1);
     begin_skip_no_alpha(&v2);
 
-    while(*v1 != '\0' && (*v1 == *v2)) {
+    while(*v1 != '\0' && (tolower(*v1) == tolower(*v2))) {
         (v1)++;
         (v2)++;
 
@@ -74,7 +74,7 @@ int end_comparator(const void * param1, const void * param2) {
     skip_no_alpha_end(&p1_now, p1_begin);
     skip_no_alpha_end(&p2_now, p2_begin);
 
-    while(p1_now != p1_begin && (*p1_now == *p2_now)) {
+    while(p1_now != p1_begin && (tolower(*p1_now) == tolower(*p2_now))) {
         (p1_now)--;
         (p2_now)--;
 

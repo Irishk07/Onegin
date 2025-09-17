@@ -18,14 +18,15 @@ int main() {
     fill_array_onegin(onegin_strings, text_onegin, text_size);
 
     FILE *text_sort = fopen("Onegin_sort.txt", "w");
+
     buble_sort_begin(onegin_strings, cnt_strok);
-
+    //qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &begin_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    qsort(onegin_strings, cnt_strok + 1, sizeof(info_about_strings), &end_comparator);
+    qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &end_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    qsort(onegin_strings, cnt_strok + 1, sizeof(info_about_strings), &point_comparator);
+    qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &point_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
     fclose(text_sort);
