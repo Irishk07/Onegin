@@ -12,24 +12,47 @@ int main() {
     int text_size = 0;
 
     char * text_onegin = read_onegin(&cnt_strok, &text_size);
+    if (text_onegin == NULL) {
+        return -1;
+    }
 
-    info_about_strings *onegin_strings = (info_about_strings*)calloc((size_t)(cnt_strok + 1), sizeof(info_about_strings));
+    info_about_strings *onegin_strings = (info_about_strings*)calloc((size_t)cnt_strok, sizeof(info_about_strings));
+    if (onegin_strings == NULL) { 
+        perror("Error is");
 
-    fill_array_onegin(onegin_strings, text_onegin, text_size);
+        onegin_dtor(text_onegin, onegin_strings);
+
+        return -1;
+    }
+
+    fill_array_onegin(onegin_strings, text_onegin, cnt_strok);
 
     FILE *text_sort = fopen("Onegin_sort.txt", "w");
+    if (text_sort == NULL) {
+        perror("Error is");
 
-    buble_sort_begin(onegin_strings, cnt_strok);
-    //qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &begin_comparator);
+        onegin_dtor(text_onegin, onegin_strings);
+
+        return -1;
+    }
+
+    //buble_sort_begin(onegin_strings, cnt_strok);
+    qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &begin_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &end_comparator);
+    qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &end_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    qsort(onegin_strings, size_t(cnt_strok + 1), sizeof(info_about_strings), &point_comparator);
+    qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &point_comparator);
     puts_onegin(onegin_strings, cnt_strok, text_sort);
 
-    fclose(text_sort);
+    if (fclose(text_sort)) {
+        perror("Error is");
+
+        onegin_dtor(text_onegin, onegin_strings);
+        
+        return -1;
+    }
 
     onegin_dtor(text_onegin, onegin_strings);
 
