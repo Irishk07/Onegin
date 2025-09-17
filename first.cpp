@@ -5,14 +5,26 @@
 
 #include <stdio.h>
 
-void f_read_onegin(char f_onegin[][LEN_OF_LINE]) {
+status f_read_onegin(char f_onegin[][LEN_OF_LINE]) {
     FILE *text = fopen("Onegin.txt", "r");
+    if (text == NULL) {
+        perror("Error is");
+
+        return READ_ERROR;
+    }
 
     int cnt_strok = 0;
     for (; fgets(f_onegin[cnt_strok], LEN_OF_LINE, text); ++cnt_strok) {
     }
 
     fclose(text);
+    if (text == NULL) {
+        perror("Error is");
+
+        return CLOSE_ERROR;
+    }
+
+    return SUCCESS;
 }
 
 void f_strswap(char f_onegin[][LEN_OF_LINE], int strok1, int strok2) {
@@ -34,12 +46,24 @@ void f_buble_sort(int cnt_strok, char f_onegin[][LEN_OF_LINE]) {
     }
 }
 
-void f_puts_onegin(int cnt_strok, char f_onegin[][LEN_OF_LINE]) {
+status f_puts_onegin(int cnt_strok, char f_onegin[][LEN_OF_LINE]) {
     FILE *text_sort = fopen("Onegin_sort.txt", "w");
+    if (text_sort == NULL) {
+        perror("Error is");
+
+        return READ_ERROR;
+    }
 
     for (int i = 0; i < cnt_strok; ++i) {
         fputs(f_onegin[i], text_sort);
     }
 
     fclose(text_sort);
+    if (text_sort == NULL) {
+        perror("Error is");
+
+        return CLOSE_ERROR;
+    }
+
+    return SUCCESS;
 }
