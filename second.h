@@ -3,13 +3,20 @@
 
 #include <stdio.h>
 
-void s_read_onegin(const char *s_onegin[]);
+enum status {
+    SUCCESS               = 0,
+    READ_ERROR            = 1,
+    STRDUP_ERROR          = 2,
+    CLOSE_ERROR           = 3
+};
 
-void s_strswap(const char *s_onegin[], size_t strok1, size_t strok2);
+status s_read_onegin(char *s_onegin[]);
 
-void s_buble_sort(const char *s_onegin[]);
+void s_strswap(char *s_onegin[], size_t strok1, size_t strok2);
 
-void s_puts_onegin(const char *s_onegin[]);
+void s_buble_sort(char *s_onegin[]);
+
+status s_puts_onegin(char *s_onegin[]);
 
 void s_onegin_dtor(char *s_onegin[]);
 
