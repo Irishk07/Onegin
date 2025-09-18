@@ -1,17 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "main.h"
 
 #include "input.h"
 #include "sort_swap.h"
 #include "put_dtor.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-
 int main() {
     int cnt_strok = 0;
     int text_size = 0;
 
-    char * text_onegin = read_onegin(&cnt_strok, &text_size);
+    const char *text_name = "Onegin.txt";
+    char * text_onegin = read_onegin(&cnt_strok, &text_size, text_name);
     if (text_onegin == NULL) {
         return -1;
     }
@@ -27,7 +28,8 @@ int main() {
 
     fill_array_onegin(onegin_strings, text_onegin, cnt_strok);
 
-    FILE *text_sort = fopen("Onegin_sort.txt", "w");
+    const char *text_name_sort = "Onegin_sort.txt";
+    FILE *text_sort = fopen(text_name_sort, "w");
     if (text_sort == NULL) {
         perror("Error is");
 

@@ -1,9 +1,9 @@
+#include <assert.h>
+#include <ctype.h>
+
 #include "sort_swap.h"
 
 #include "string_functions.h"
-
-#include <assert.h>
-#include <ctype.h>
 
 void strswap(info_about_strings *onegin_strings, int strok1, int strok2) {
     assert(onegin_strings != NULL);
@@ -70,7 +70,6 @@ int end_comparator(const void * param1, const void * param2) {
     info_about_strings struct2 = *(const info_about_strings*)param2;
 
     char *p1_now = struct1.point + struct1.size - 1;
-
     char *p2_now = struct2.point + struct2.size - 1;
 
     skip_no_alpha_end(&p1_now, struct1.point);

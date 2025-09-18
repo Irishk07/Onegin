@@ -1,9 +1,9 @@
+#include <assert.h>
+#include <stdlib.h>
+
 #include "put_dtor.h"
 
 #include "main.h"
-
-#include <assert.h>
-#include <stdlib.h>
 
 void puts_onegin(info_about_strings *onegin_strings, int cnt_strok, FILE * text_sort) {
     assert(onegin_strings != NULL);
