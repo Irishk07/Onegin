@@ -1,33 +1,39 @@
-#include "input.h"
-
-#include "main.h"
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 
-char *read_onegin(int *cnt_strok, int *text_size) {
+#include "input.h"
+
+#include "main.h"
+
+int size_of_text(const char *text_name) {
+    struct stat text_info = {};
+
+    if (stat(text_name, &text_info) == -1) {
+        perror("Error is");
+        
+        return -1;
+    }
+
+    return (int)text_info.st_size;
+}
+
+char *read_onegin(int *cnt_strok, int *text_size, const char *text_name) {
     assert(cnt_strok != NULL);
     assert(text_size != NULL);
 
-    FILE *text = fopen("Onegin.txt", "r");
+    FILE *text = fopen(text_name, "r");
     if (text == NULL) {
         perror("Error is");
 
         return NULL;
     }
 
-    const char *text_name = "Onegin.txt";
-
-    struct stat text_info = {};
-    if (stat(text_name, &text_info) == -1) {
-        perror("Error is");
-        
+    *text_size = size_of_text(text_name);
+    if (*text_size == -1) {
         return NULL;
     }
-
-    *text_size = (int)text_info.st_size;
 
     char * text_onegin = (char*)calloc((size_t)(*text_size + 1), sizeof(char));
     if (text_onegin == NULL) {
@@ -92,6 +98,4 @@ void fill_array_onegin(info_about_strings *onegin_strings, char * text_onegin, i
 
         text_onegin++;
     }
-
-
 }
