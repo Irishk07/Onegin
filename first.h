@@ -1,7 +1,8 @@
 #ifndef FIRST_H_
 #define FIRST_H_
 
-#include "main.h"
+const int LEN_OF_FILE = 8500;
+const int LEN_OF_LINE = 200;
 
 enum status {
     SUCCESS               = 0,

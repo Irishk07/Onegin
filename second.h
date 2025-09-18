@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+const int LEN_OF_FILE = 8500;
+const int LEN_OF_LINE = 200;
+
 enum status {
     SUCCESS               = 0,
     READ_ERROR            = 1,
