@@ -21,7 +21,6 @@ int size_of_text(const char *text_name) {
     return (int)text_info.st_size;
 }
 
-//char *read_onegin(int *cnt_strok, int *text_size, const char *text_name, status *status_of_work)
 status read_onegin(all_onegin *onegin, const char *text_name, status *status_of_work) {
     assert(onegin != NULL);
     assert(onegin->onegin_strings == NULL);    
