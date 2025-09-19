@@ -1,15 +1,15 @@
 #ifndef SORT_SWAP_H_
 #define SORT_SWAP_H_
 
-#include "main.h"
+#include "ctor_dtor.h"
 
-void strswap(info_about_strings *onegin_strings, int strok1, int strok2);
+void strswap(all_onegin *onegin, int strok1, int strok2);
 
 void begin_skip_no_alpha(const char **pointer);
 
 int begin_comparator(const void * param1, const void * param2);
 
-void buble_sort_begin(info_about_strings *onegin_strings, int cnt_strok);
+void buble_sort_begin(all_onegin *onegin);
 
 void skip_no_alpha_end(char **now_pointer, char *begin_pointer);
 

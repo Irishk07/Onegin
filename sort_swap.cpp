@@ -3,14 +3,15 @@
 
 #include "sort_swap.h"
 
+#include "ctor_dtor.h"
 #include "string_functions.h"
 
-void strswap(info_about_strings *onegin_strings, int strok1, int strok2) {
-    assert(onegin_strings != NULL);
+void strswap(all_onegin *onegin, int strok1, int strok2) {
+    assert(onegin->onegin_strings != NULL);
 
-    info_about_strings temp = onegin_strings[strok1];
-                              onegin_strings[strok1] = onegin_strings[strok2];
-                                                       onegin_strings[strok2] = temp;
+    info_about_strings temp = onegin->onegin_strings[strok1];
+                              onegin->onegin_strings[strok1] = onegin->onegin_strings[strok2];
+                                                               onegin->onegin_strings[strok2] = temp;
 }
 
 
@@ -45,14 +46,14 @@ int begin_comparator(const void * param1, const void * param2) {
     return (tolower(*v1) - tolower(*v2));
 }
 
-void buble_sort_begin(info_about_strings *onegin_strings, int cnt_strok) {
-    assert(onegin_strings != NULL);
+void buble_sort_begin(all_onegin *onegin) {
+    assert(onegin->onegin_strings != NULL);
 
-    for (int i = 0; i < cnt_strok; ++i) {
-        for (int j = 0; j < cnt_strok - i - 1; ++j) {
+    for (int i = 0; i < onegin->about_onegin_text.cnt_strok; ++i) {
+        for (int j = 0; j < onegin->about_onegin_text.cnt_strok - i - 1; ++j) {
 
-            if (begin_comparator(&onegin_strings[j].point, &onegin_strings[j + 1].point) > 0) {
-                strswap(onegin_strings, j, j + 1);
+            if (begin_comparator(&onegin->onegin_strings[j].point, &onegin->onegin_strings[j + 1].point) > 0) {
+                strswap(onegin, j, j + 1);
             }
         }
     }
