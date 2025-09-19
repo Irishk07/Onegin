@@ -11,52 +11,59 @@ int main() {
     int cnt_strok = 0;
     int text_size = 0;
 
-    const char *text_name = "Onegin.txt";
-    char * text_onegin = read_onegin(&cnt_strok, &text_size, text_name);
-    if (text_onegin == NULL) {
-        return -1;
+    status status_of_work = SUCCESS;
+
+    const char *text_name = NULL;
+    char * text_onegin = NULL;
+    info_about_strings *onegin_strings = {};
+    const char *text_name_sort = NULL;
+    FILE *text_sort = NULL;
+    const char *explanation = NULL;
+
+    text_name = "Onegin.txt";
+    text_onegin = read_onegin(&cnt_strok, &text_size, text_name, &status_of_work);
+    if (status_of_work == FAILED) {
+        FAIL;
     }
 
-    info_about_strings *onegin_strings = (info_about_strings*)calloc((size_t)cnt_strok, sizeof(info_about_strings));
+    onegin_strings = (info_about_strings*)calloc((size_t)cnt_strok, sizeof(info_about_strings));
     if (onegin_strings == NULL) { 
-        perror("Error is");
-
-        onegin_dtor(text_onegin, onegin_strings);
-
-        return -1;
+        FAIL;
     }
 
     fill_array_onegin(onegin_strings, text_onegin, cnt_strok);
 
-    const char *text_name_sort = "Onegin_sort.txt";
-    FILE *text_sort = fopen(text_name_sort, "w");
+    text_name_sort = "Onegin_sort.txt";
+    text_sort = fopen(text_name_sort, "w");
     if (text_sort == NULL) {
-        perror("Error is");
-
-        onegin_dtor(text_onegin, onegin_strings);
-
-        return -1;
+        FAIL;
     }
 
     //buble_sort_begin(onegin_strings, cnt_strok);
     qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &begin_comparator);
-    puts_onegin(onegin_strings, cnt_strok, text_sort);
+    explanation = "You can see Pushkin's great work sorted in ascending order from the begginning of the lines";
+    puts_onegin(onegin_strings, cnt_strok, text_sort, explanation);
 
     qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &end_comparator);
-    puts_onegin(onegin_strings, cnt_strok, text_sort);
+    explanation = "You can see Pushkin's great work sorted in ascending order from the end of the lines";
+    puts_onegin(onegin_strings, cnt_strok, text_sort, explanation);
 
     qsort(onegin_strings, (size_t)cnt_strok, sizeof(info_about_strings), &point_comparator);
-    puts_onegin(onegin_strings, cnt_strok, text_sort);
+    explanation = "You can see Pushkin's great work in its original form\n(using a cringe ascending pointers sorting)";
+    puts_onegin(onegin_strings, cnt_strok, text_sort, explanation);
 
-    if (fclose(text_sort)) {
-        perror("Error is");
-
-        onegin_dtor(text_onegin, onegin_strings);
-        
-        return -1;
+    if (fclose(text_sort) == EOF) {
+        FAIL;
     }
 
     onegin_dtor(text_onegin, onegin_strings);
 
     return 0;
+
+    exits:
+        perror("Error is");
+
+        onegin_dtor(text_onegin, onegin_strings);
+
+        return -1;
 }

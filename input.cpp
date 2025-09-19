@@ -11,35 +11,33 @@ int size_of_text(const char *text_name) {
     struct stat text_info = {};
 
     if (stat(text_name, &text_info) == -1) {
-        perror("Error is");
-        
         return -1;
     }
 
     return (int)text_info.st_size;
 }
 
-char *read_onegin(int *cnt_strok, int *text_size, const char *text_name) {
+char *read_onegin(int *cnt_strok, int *text_size, const char *text_name, status *status_of_work) {
     assert(cnt_strok != NULL);
     assert(text_size != NULL);
 
     FILE *text = fopen(text_name, "r");
     if (text == NULL) {
-        perror("Error is");
+        *status_of_work = FAILED;
 
         return NULL;
     }
 
     *text_size = size_of_text(text_name);
     if (*text_size == -1) {
+        *status_of_work = FAILED;
+
         return NULL;
     }
 
     char * text_onegin = (char*)calloc((size_t)(*text_size + 1), sizeof(char));
     if (text_onegin == NULL) {
-        perror("Error is");
-
-        free(text_onegin);
+        *status_of_work = FAILED;
 
         return NULL;
     }
@@ -49,6 +47,7 @@ char *read_onegin(int *cnt_strok, int *text_size, const char *text_name) {
     fread((char *)text_onegin, sizeof(char), (size_t)*text_size, text);
     if (ferror(text) != 0) {
         fprintf(stderr, "Error is: problem with reading file");
+        *status_of_work = FAILED_DONE;
 
         free(text_onegin);
 
@@ -62,9 +61,7 @@ char *read_onegin(int *cnt_strok, int *text_size, const char *text_name) {
     }
 
     if (fclose(text) == EOF) {
-        perror("Error is");
-
-        free(text_onegin);
+        *status_of_work = FAILED;
 
         return NULL; 
     }

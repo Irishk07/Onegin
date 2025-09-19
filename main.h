@@ -3,8 +3,13 @@
 
 #include <stdio.h>
 
-const int LEN_OF_FILE = 8500;
-const int LEN_OF_LINE = 200;
+#define FAIL goto exits
+
+enum status {
+    SUCCESS      = 0,
+    FAILED       = 1,
+    FAILED_DONE  = 2,
+};
 
 struct info_about_strings{
     char * point = NULL;
