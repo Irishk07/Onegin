@@ -3,7 +3,9 @@
 
 #include "main.h"
 
-void puts_onegin(info_about_strings *onegin_strings, int cnt_strok, FILE * text_sort);
+void print_buf_to_file(char *text_onegin, FILE *text_sort, int text_size, const char * explanation);
+
+void puts_onegin(info_about_strings *onegin_strings, int cnt_strok, FILE * text_sort, const char *explanation);
 
 void onegin_dtor(char *text_onegin, info_about_strings *onegin_strings);
 

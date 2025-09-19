@@ -52,6 +52,9 @@ int main() {
     explanation = "You can see Pushkin's great work in its original form\n(using a cringe ascending pointers sorting)";
     puts_onegin(onegin_strings, cnt_strok, text_sort, explanation);
 
+    explanation = "You can see Pushkin's great work in its original form\n(using a buffer that hasn't been modified)";
+    print_buf_to_file(text_onegin, text_sort, text_size, explanation);
+
     if (fclose(text_sort) == EOF) {
         FAIL;
     }
