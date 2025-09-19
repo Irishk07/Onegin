@@ -3,17 +3,17 @@
 
 #include <stdio.h>
 
+
 #define FAIL goto exits
 
 enum status {
     SUCCESS      = 0,
-    FAILED       = 1,
-    FAILED_DONE  = 2,
-};
+    OPEN_ERROR   = 1,
+    STAT_ERROR   = 2,
+    CALLOC_ERROR = 3,
+    READ_ERROR   = 4,
+    CLOSE_ERROR  = 5,
 
-struct info_about_strings{
-    char * point = NULL;
-    int size = 0;
 };
 
 #endif //MAIN_H_
